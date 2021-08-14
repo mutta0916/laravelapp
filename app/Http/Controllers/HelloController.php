@@ -21,6 +21,6 @@ class HelloController extends Controller
             'age' => 'numeric|between:0,150',
         ];
         $this->validate($request, $validate_rule);
-        return view('hello.index', ['msg'=>'正しく入力されました！']);
+        return view('hello.index', ['msg'=>'正しく入力されました！']);  
     }
 }

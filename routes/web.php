@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloController;
+use App\Http\Controllers;
 use App\Http\Middleware\HelloMidleware;
 
 /*
@@ -19,7 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('hello', [HelloController::class, 'index'])->middleware('helo');
-Route::get('hello', [HelloController::class, 'index']);
+//Route::get('hello', [HelloController::class, 'index']);
+
+//上と下の書き方何が違うの？？
+Route::get('hello', HelloController::class);
+//Route::get('hello', 'HelloController');
+
+// Route::get('hello', [HelloController::class, 'index']);
 Route::post('hello', [HelloController::class, 'post']);
-// Route::get('hello/other', [HelloController::class, 'other']);

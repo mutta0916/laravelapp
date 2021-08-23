@@ -43,9 +43,9 @@ class HelloController extends Controller
         // $item = DB::select('select * from people where id = :id', $param);
 
         //クエリビルダ
-        $item = DB::table('people')
-            -> where('id', $request->id)->first();
-        return view('hello.edit', ['form' => $item]);
+        // $item = DB::table('people')
+        //     -> where('id', $request->id)->first();
+        // return view('hello.edit', ['form' => $item]);
     }
 
     public function update(Request $request)

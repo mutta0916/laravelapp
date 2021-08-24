@@ -5,8 +5,7 @@ use App\Http\Controllers\HelloController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\RestappController;
-use App\Http\Controllers;
-use App\Http\Middleware\HelloMidleware;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,13 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('hello', [HelloController::class, 'index']);
-
-//上と下の書き方何が違うの？？
-//Route::get('hello', HelloController::class);
-//Route::get('hello', 'HelloController');
-
-Route::get('hello', [HelloController::class, 'index']);
+Route::get('hello', [HelloController::class, 'index'])->middleware('auth');
 Route::get('hello/add', [HelloController::class, 'add']);
 Route::post('hello/add', [HelloController::class, 'create']);
 Route::get('hello/edit', [HelloController::class, 'edit']);
@@ -63,3 +56,10 @@ Route::get('hello/rest', [HelloController::class, 'rest']);
 
 Route::get('hello/session', [HelloController::class, 'ses_get']);
 Route::post('hello/session', [HelloController::class, 'ses_put']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('hello/auth', [HelloController::class, 'getAuth']);
+Route::post('hello/auth', [HelloController::class, 'postAuth']);

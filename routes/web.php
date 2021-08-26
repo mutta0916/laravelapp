@@ -69,3 +69,8 @@ Route::middleware([HelloMidleware::class])->group(function () {
     Route::get('/hello', [HelloController::class, 'index']);
     Route::get('/hello/other', [HelloController::class, 'other']);
 });
+
+Route::namespace('Smaple')->group(function () {
+    Route::get('/sample', [SampleController::class, 'index']);
+    Route::get('/sample/other', [SampleController::class, 'other']);
+});

@@ -16,13 +16,13 @@ class HelloMidleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $response = $next($request);
-        $content = $response->content();
-
-        $pattern = '/<middleware>(.*)<\/middleware>/i';
-        $replace = '<a href="http://$1">$1</a>';
-        $content = preg_replace($pattern, $replace, $content);
-        $response->setContent($content);
-        return $response;
+        $hello = 'Hello! This is Middleware!!';
+        $bye = 'Good-bye, Middleware...';
+        $data = [
+            'hello'=>$hello,
+            'bye'=>$bye
+        ];
+        $request->merge($data);
+        return $next($request);
     }
 }

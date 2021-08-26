@@ -5,6 +5,7 @@ use App\Http\Controllers\HelloController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\RestappController;
+use App\Http\Middleware\HelloMidleware;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -22,7 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('hello', [HelloController::class, 'index'])->middleware('auth');
+// Route::get('/hello/{id}', [HelloController::class, 'index'])->where('id', '[0-9]+');
 Route::get('hello/add', [HelloController::class, 'add']);
 Route::post('hello/add', [HelloController::class, 'create']);
 Route::get('hello/edit', [HelloController::class, 'edit']);
@@ -63,3 +64,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('hello/auth', [HelloController::class, 'getAuth']);
 Route::post('hello/auth', [HelloController::class, 'postAuth']);
+
+Route::middleware([HelloMidleware::class])->group(function () {
+    Route::get('/hello', [HelloController::class, 'index']);
+    Route::get('/hello/other', [HelloController::class, 'other']);
+});

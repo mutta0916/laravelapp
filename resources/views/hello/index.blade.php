@@ -15,7 +15,7 @@
 @endsection
 
 @section('content')
-
-    <p>{{$msg}}</p>
-
+<body>
+    <h1></h1>
+</body>
 @endsection

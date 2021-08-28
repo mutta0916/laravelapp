@@ -2,31 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use Facade\Ignition\Tabs\Tab;
-use Illuminate\Bus\UpdatedBatchJobCounts;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\Person;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Stringable;
 
 class HelloController extends Controller
 {
-    public function index($person)
+    private $fname;
+
+    function __construct()
     {
-        $sample_msg = config('sample.message');
-        $sample_data = config('sample.data');
+        $this->fname = 'hello.txt';
+    }
+
+    public function index()
+    {
+        $sample_msg = Storage::disk('public')->url($this->fname);
+        $sample_data = Storage::disk('public')->get($this->fname);
         $data = [
             'msg'=>$sample_msg,
-            'data'=>$sample_data,
+            'data'=>explode(PHP_EOL ,$sample_data),
         ];
         return view('hello.index', $data);
     }
 
-    public function other(Request $request)
+    public function other($msg)
     {
-        $data = [
-            'msg'=>$request->bye,
-        ];
-        return view('hello.index', $data);
+        return Storage::disk('public')->download($this->fname);
     }
 }

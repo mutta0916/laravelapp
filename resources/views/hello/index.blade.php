@@ -16,6 +16,8 @@
 
 @section('content')
 <body>
-    <h1></h1>
+    <h1>Hello/index</h1>
+    <p><a href="/hello/other">ダウンロード</a></p>
+    </ul>
 </body>
 @endsection

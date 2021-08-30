@@ -25,8 +25,12 @@ Route::get('/', function () {
 });
 
 Route::get('/hello', [HelloController::class, 'index'])->name('hello');
+Route::post('/hello', [HelloController::class, 'index']);
 Route::get('/hello/{msg}', [HelloController::class, 'other']);
 Route::get('/sample', [SampleController::class, 'index'])->name('sample');
+
+Route::get('/hello/other', [HelloController::class, 'other']);
+Route::post('/hello/other', [HelloController::class, 'other']);
 
 Route::get('hello/add', [HelloController::class, 'add']);
 Route::post('hello/add', [HelloController::class, 'create']);

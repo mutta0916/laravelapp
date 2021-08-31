@@ -47,6 +47,11 @@ class Kernel extends HttpKernel
         'helo' => [
             \App\Http\Middleware\HelloMidleware::class,
         ],
+
+        'MyMW' => [
+            \App\Http\Middleware\HelloMidleware::class,
+            \App\Http\Middleware\MyMiddleware::class,
+        ],
     ];
 
     /**

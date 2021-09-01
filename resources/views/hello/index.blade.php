@@ -18,11 +18,16 @@
 <body>
     <h1>Hello/index</h1>
     <p>{!!$msg!!}</p>
-    <ol>
+    <table border="1">
         @foreach ($data as $item)
-            <li>{{$item->name}} [{{$item->mail}}],{{$item->age}}</li>
+        <tr>
+            <th>{{$item->id}}</th>
+            <td>{{$item->name}}</td>
+            <td>{{$item->mail}}</td>
+            <td>{{$item->age}}</td>
+        </tr>
         @endforeach
-    </ol>
+    </table>
     <hr>
 </body>
 @endsection

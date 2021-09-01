@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Pagination\MyPaginator;
+use App\Models\Person;
 
 class HelloController extends Controller
 {
@@ -11,11 +13,12 @@ class HelloController extends Controller
     {
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $result = DB::table('people')->get();
+        $msg = 'show people record.';
+        $result = Person::get();
         $data = [
-            'msg' => 'Database access.',
+            'msg' => $msg,
             'data' => $result,
         ];
         return view('hello.index', $data);

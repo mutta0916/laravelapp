@@ -18,13 +18,25 @@
 <body>
     <h1>Hello/index</h1>
     <p>{!!$msg!!}</p>
+
+    <h2>全件取得</h2>
     <table border="1">
-        @foreach ($data as $item)
+        @foreach ($alldata as $item)
         <tr>
             <th>{{$item->id}}</th>
             <td>{{$item->name}}</td>
             <td>{{$item->mail}}</td>
             <td>{{$item->age}}</td>
+        </tr>
+        @endforeach
+    </table>
+
+    <h2>結果</h2>
+    <table border="1">
+        @foreach ($data as $item)
+        <tr>
+            <th>{{$item->id}}</th>
+            <td>{{$item->name_and_age}}</td>
         </tr>
         @endforeach
     </table>

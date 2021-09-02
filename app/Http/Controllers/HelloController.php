@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Pagination\MyPaginator;
 use App\Models\Person;
+use Illuminate\Support\Facades\Log;
 
 class HelloController extends Controller
 {
@@ -15,24 +16,36 @@ class HelloController extends Controller
 
     public function index(Request $request)
     {
+        Log::info('indexアクションだよ！');
         $msg = 'show people record.';
-        $result = Person::get();
+        $re = Person::get();
+        $fields = Person::get()->fields();
+
+        $alldata = Person::get();
+
         $data = [
-            'msg' => $msg,
-            'data' => $result,
+            'msg' => implode(',', $fields),
+            'data' => $re,
+            'alldata' => $alldata,
         ];
         return view('hello.index', $data);
     }
 
-    public function other(Request $request)
+    public function save($id, $name)
     {
-        $data = [
-            'name' => 'Taro',
-            'mail' => 'taro@yamada',
-            'tel' => '090-999-9999',
-        ];
-        $query_str = http_build_query($data);
-        $data['msg'] = $query_str;
-        return redirect()->route('hello', $data);
+        $record = Person::find($id);
+        $record->name = $name;
+        $record->save();
+        return redirect()->route('hello');
+    }
+
+    public function other()
+    {
+        Log::info('otherアクションだよ！');
+        $person = new Person();
+        $person->all_data = ['aaa','bbb@ccc', 1234];
+        $person->save();
+
+        return redirect()->route('hello');
     }
 }

@@ -1,6 +1,7 @@
 <html>
 <head>
 <title>@yield('title')</title>
+<link href="/css/app.css" rel="stylesheet">
 <style>
 body {font-size: 16pt; color:#999; margin: 5px;}
 h1 {font-size: 50pt; text-align:right; color:#f6f6f6;  margin:-20px 0px -30px 0px; letter-spacing: -4pt;}
@@ -12,7 +13,23 @@ td {border: solid 1px #aaa; color: #999; padding: 5px 10px;}
 .content {margin: 10px;}
 .footer {text-align: right; font-size: 10pt; margin: 10px; border-bottom: solid 1px #ccc; color: #ccc;}
 </style>
-<link href="/css/app.css" rel="stylesheet">
+<script>
+    function doAction(){
+        var id = document.querySelector('#id').value;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/hello/json/' + id, true);
+        xhr.responseType = 'json';
+        xhr.onload = function(e) {
+            if (this.status == 200) {
+                var result = this.response;
+                document.querySelector('#name').textContent = result.name;
+                document.querySelector('#mail').textContent = result.mail;
+                document.querySelector('#age').textContent = result.age;
+            }
+        };
+        xhr.send();
+    }
+</script>
 </head>
 <body>
     <h1>@yield('title')</h1>

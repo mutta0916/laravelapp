@@ -17,29 +17,14 @@
 @section('content')
 <body>
     <h1>Hello/index</h1>
-    <p>{!!$msg!!}</p>
-
-    <h2>全件取得</h2>
-    <table border="1">
-        @foreach ($alldata as $item)
-        <tr>
-            <th>{{$item->id}}</th>
-            <td>{{$item->name}}</td>
-            <td>{{$item->mail}}</td>
-            <td>{{$item->age}}</td>
-        </tr>
-        @endforeach
-    </table>
-
-    <h2>結果</h2>
-    <table border="1">
-        @foreach ($data as $item)
-        <tr>
-            <th>{{$item->id}}</th>
-            <td>{{$item->name_and_age}}</td>
-        </tr>
-        @endforeach
-    </table>
-    <hr>
+    <div>
+        <input type="number" id="id" value="1">
+        <button onclick="doAction();">Click</button>
+    </div>
+    <ul>
+        <li id="name"></li>
+        <li id="mail"></li>
+        <li id="age"></li>
+    </ul>
 </body>
 @endsection

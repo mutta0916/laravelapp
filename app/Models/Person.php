@@ -26,6 +26,14 @@ class Person extends Model
         'age' => 'integer|min:0|max:150'
     );
 
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+        $array['reverse'] = strrev($array['name']);
+
+        return $array;
+    }
+
     public function getData()
     {
         return $this->id . ': ' . $this->name . ' (' . $this->age . ')';

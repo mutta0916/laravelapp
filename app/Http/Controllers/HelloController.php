@@ -14,19 +14,29 @@ class HelloController extends Controller
     {
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        Log::info('indexアクションだよ！');
+        Person::get(['*'])->searchable();   
         $msg = 'show people record.';
-        $re = Person::get();
-        $fields = Person::get()->fields();
+        $result = Person::get();
+        $data = [
+            'input' => '',
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
 
-        $alldata = Person::get();
+    public function send(Request $request)
+    {
+        $input = $request->input('find');
+        $msg = 'search: ' . $input;
+        $result = Person::search($input)->get();
 
         $data = [
-            'msg' => implode(',', $fields),
-            'data' => $re,
-            'alldata' => $alldata,
+            'input' => $input,
+            'msg' => $msg,
+            'data' => $result,
         ];
         return view('hello.index', $data);
     }

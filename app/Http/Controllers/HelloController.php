@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Pagination\MyPaginator;
+use App\Jobs\MyJob;
 use App\Models\Person;
 use Illuminate\Support\Facades\Log;
 
@@ -16,7 +17,7 @@ class HelloController extends Controller
 
     public function index()
     {
-        Person::get(['*'])->searchable();   
+        MyJob::dispatch();
         $msg = 'show people record.';
         $result = Person::get();
         $data = [

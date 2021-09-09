@@ -15,9 +15,12 @@ class HelloController extends Controller
     {
     }
 
-    public function index()
+    public function index(Person $person = null)
     {
-        MyJob::dispatch();
+        if ($person != null)
+        {
+            MyJob::dispatch($person);
+        }
         $msg = 'show people record.';
         $result = Person::get();
         $data = [

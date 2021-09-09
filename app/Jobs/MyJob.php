@@ -34,10 +34,12 @@ class MyJob implements ShouldQueue
     public function handle()
     {
         $sufix = '[+MYJOB]';
-        // if (strpos($this->person->name, $sufix))
-        // {
-        //     $this->person->name = str_replace($sufix, '',)
-        // }
-        echo '<p class="myjob">THIS IS MYJOB!</p>';
+        if (strpos($this->person->name, $sufix))
+        {
+            $this->person->name = str_replace($sufix, '', $this->person->name);
+        } else {
+            $this->person->name .= $sufix;
+        }
+        $this->person->save();
     }
 }

@@ -24,7 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello', [HelloController::class, 'index'])->name('hello')->middleware('MyMW');
+Route::get('/hello', [HelloController::class, 'index'])->name('hello');
 Route::get('/hello/{person}', [HelloController::class, 'index']);
 // Route::get('/hello/{id}/{name}', [HelloController::class, 'save']);
 Route::post('/hello', [HelloController::class, 'index']);

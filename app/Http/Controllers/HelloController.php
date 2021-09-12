@@ -9,6 +9,7 @@ use App\Jobs\MyJob;
 use App\Models\Person;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use App\Events\PersonEvent;
 
 class HelloController extends Controller
 {
@@ -32,13 +33,14 @@ class HelloController extends Controller
     {
         $id = $request->input('id');
         $person = Person::find($id);
-
-        dispatch(function() use ($person)
-        {
-            Storage::append('person_access_log.txt', $person->all_data);
-        });
-
-        return redirect()->route('hello');
+        $event = new PersonEvent($person);
+        event($event);
+        $data = [
+            'input' => '',
+            'msg' => 'id=' . $id,
+            'data' => [$person],
+        ];
+        return view('hello.index', $data);
     }
 
     public function save($id, $name)
@@ -51,7 +53,6 @@ class HelloController extends Controller
 
     public function other()
     {
-        Log::info('otherアクションだよ！');
         $person = new Person();
         $person->all_data = ['aaa','bbb@ccc', 1234];
         $person->save();

@@ -11,34 +11,34 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class HelloTest extends TestCase
 {
-    use DatabaseMigrations;
+    //use DatabaseMigrations;
 
     public function testHello()
     {
-        User::factory()->create([
-            'name' => 'AAA',
-            'email' => 'BBB@CCC.COM',
-            'password' => 'ABCABC',
-        ]);
-        User::factory()->count(10)->create();
+        // User::factory()->create([
+        //     'name' => 'AAA',
+        //     'email' => 'BBB@CCC.COM',
+        //     'password' => 'ABCABC',
+        // ]);
+        // User::factory()->count(10)->create();
 
-        $this->assertDatabaseHas('users',[
-            'name' => 'AAA',
-            'email' => 'BBB@CCC.COM',
-            'password' => 'ABCABC',
-        ]);
+        // $this->assertDatabaseHas('users',[
+        //     'name' => 'AAA',
+        //     'email' => 'BBB@CCC.COM',
+        //     'password' => 'ABCABC',
+        // ]);
 
-        Person::factory()->create([
-            'name' => 'XXX',
-            'mail' => 'YYY@ZZZ.COM',
-            'age' => '123',
-        ]);
-        Person::factory()->count(10)->create();
+        // Person::factory()->create([
+        //     'name' => 'XXX',
+        //     'mail' => 'YYY@ZZZ.COM',
+        //     'age' => '123',
+        // ]);
+        // Person::factory()->count(10)->create();
 
-        $this->assertDatabaseHas('people',[
-            'name' => 'XXX',
-            'mail' => 'YYY@ZZZ.COM',
-            'age' => '123',
-        ]);
+        // $this->assertDatabaseHas('people',[
+        //     'name' => 'XXX',
+        //     'mail' => 'YYY@ZZZ.COM',
+        //     'age' => '123',
+        // ]);
     }
 }

@@ -17,5 +17,11 @@ class ExampleTest extends TestCase
         $response = $this->get('/');
 
         $response->assertStatus(200);
+        $this->get('/hello')->assertOk();
+        $this->post('/hello')->assertOk();
+        $this->get('/hello/1')->assertOk();
+        $this->get('/hoge')->assertStatus(404);
+        $this->get('/hello')->assertSeeText('Index');
+        $this->get('/hello')->assertSee('    <h1>Hello/index</h1>');
     }
 }

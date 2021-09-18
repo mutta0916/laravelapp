@@ -15,10 +15,11 @@
 @endsection
 
 @section('content')
-<body>
+<body style="padding:10px;">
     <h1>Hello/index</h1>
     <p>{{$msg}}</p>
-    <div>
+
+    {{-- <div>
         <form action="/hello" method="POST">
         @csrf
         ID: <input type="text" id="id" name="id">
@@ -34,6 +35,23 @@
         </tr>
         @endforeach
     </table>
+    <hr> --}}
+
+    <table border="1">
+        @foreach ($data as $item)
+        <tr>
+            <th>{{$item->id}}</th>
+            <td>{{$item->all_data}}</td>
+        </tr>
+        @endforeach
+    </table>
+
     <hr>
+
+    <div id="app">
+        <my-component></my-component>
+    </div>
+
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 @endsection

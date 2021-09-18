@@ -1,7 +1,9 @@
 <html>
 <head>
 <title>@yield('title')</title>
-<link href="/css/app.css" rel="stylesheet">
+{{-- <link href="/css/app.css" rel="stylesheet"> --}}
+<link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
 body {font-size: 16pt; color:#999; margin: 5px;}
 h1 {font-size: 50pt; text-align:right; color:#f6f6f6;  margin:-20px 0px -30px 0px; letter-spacing: -4pt;}

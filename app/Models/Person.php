@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\Casts\AsCollection;
 
 class Person extends Model
 {
@@ -59,15 +60,15 @@ class Person extends Model
         return $this->name . '(' . $this->age . ')' . '[' . $this->mail . ']';
     }
 
-    public function getNameAttribute($value)
-    {
-        return strtoupper($value);
-    }
+    // public function getNameAttribute($value)
+    // {
+    //     return strtoupper($value);
+    // }
 
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = strtoupper($value);
-    }
+    // public function setNameAttribute($value)
+    // {
+    //     $this->attributes['name'] = strtoupper($value);
+    // }
 
     public function setAllDataAttribute(Array $value)
     {
@@ -99,6 +100,11 @@ class Person extends Model
     {
         return $this->hasMany('App\Models\Board');
     }
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
 }
 
 class MyCollection extends Collection

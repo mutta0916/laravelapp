@@ -27,4 +27,40 @@ class PersonFactory extends Factory
             'age' => random_int(1,99),
         ];
     }
+
+    // $factory->state(Person::class, 'upper', function($faker)
+    // {
+    //     return [
+    //         'name' => strtoupper($faker->name()),
+    //     ];
+    // });
+
+    public function upper()
+    {
+        return $this->state(function () {
+            return [
+                'name' => strtoupper($this->faker->name()),
+            ];
+        });
+    }
+
+    public function lower()
+    {
+        return $this->state(function () {
+            return [
+                'name' => strtolower($this->faker->name()),
+            ];
+        });
+    }
+
+    public function configure()
+    {
+        return $this->afterMaking(function (Person $person) {
+            $person->name .= ' [making]';
+            $person->save();
+        })->afterCreating(function (Person $person) {
+            $person->name .= ' [creating]';
+            $person->save();
+        });
+    }
 }

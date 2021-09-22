@@ -57,19 +57,44 @@ class ExampleTest extends TestCase
         // $this->assertDatabaseMissing('people', $data);
 
         // ファクトリを使ったテスト
-        for ($i = 0; $i < 100; $i++)
+        // for ($i = 0; $i < 100; $i++)
+        // {
+        //     Person::factory()->create();
+        // }
+
+        // $count = Person::get()->count();
+        // $person = Person::find(rand(1, $count));
+        // $data = $person->toArray();
+        // print_r($data);
+
+        // $this->assertDatabaseHas('people', $data);
+
+        // $person->delete();
+        // $this->assertDatabaseMissing('people', $data);
+
+        // ステートのテスト
+        $list = [];
+        for($i = 0;$i < 10;$i++)
         {
-            Person::factory()->create();
+            $p1 = Person::factory()->create();
+            $p2 = Person::factory()->upper()->create();
+            $p3 = Person::factory()->lower()->create();
+            $p4 = Person::factory()->upper()->lower()->create();
+            $list = array_merge($list, [$p1->id, $p2->id, $p3->id, $p4->id]);
         }
 
-        $count = Person::get()->count();
-        $person = Person::find(rand(1, $count));
-        $data = $person->toArray();
-        print_r($data);
+        for($i = 0;$i < 10;$i++)
+        {
+            shuffle($list);
+            $item = array_shift($list);
+            $person = Person::find($item);
+            $data = $person->toArray();
+            print_r($data);
 
-        $this->assertDatabaseHas('people', $data);
+            $this->assertDatabaseHas('people',$data);
 
-        $person->delete();
-        $this->assertDatabaseMissing('people', $data);
+            $person->delete();
+            $this->assertDatabaseMissing('people',$data);
+        }
     }
 }

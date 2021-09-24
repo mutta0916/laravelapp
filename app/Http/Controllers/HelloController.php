@@ -10,6 +10,7 @@ use App\Models\Person;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use App\Events\PersonEvent;
+use App\MyClasses\PowerMyService;
 
 class HelloController extends Controller
 {
@@ -17,11 +18,21 @@ class HelloController extends Controller
     {
     }
 
-    public function index()
+    public function index(PowerMyService $service)
     {
+        // $data = [
+        //     'msg' => 'This is Vue.js application.',
+        //     'data' => Person::get(),
+        // ];
+        // return view('hello.index', $data);
+
+        $service->setId(1);
+        $msg = $service->say();
+        $result = Person::get();
         $data = [
-            'msg' => 'This is Vue.js application.',
-            'data' => Person::get(),
+            'input' => '',
+            'msg' => $msg,
+            'data' => $result,
         ];
         return view('hello.index', $data);
     }

@@ -1,6 +1,8 @@
 <?php
 namespace App\MyClasses;
 
+use Illuminate\Support\Facades\Log;
+
 class PowerMyService implements MyServiceInterFace
 {
     private $id = -1;
@@ -14,6 +16,7 @@ class PowerMyService implements MyServiceInterFace
 
     public function setId($id)
     {
+        Log::info("さーびす！");
         if ($id >= 0 && $id < count($this->data))
         {
             $this->id = $id;

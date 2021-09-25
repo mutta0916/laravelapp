@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Foundation\Inspiring;
+use App\Models\Person;
 
 class MyCommand extends Command
 {
@@ -11,7 +13,7 @@ class MyCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'my:cmd';
+    protected $signature = 'my:cmd {--id=?} {--name=?}';
 
     /**
      * The console command description.
@@ -37,6 +39,24 @@ class MyCommand extends Command
      */
     public function handle()
     {
-        return 0;
+        // echo "\n*今日の格言*\n\n";
+        // echo Inspiring::quote();
+        // echo "\n\n";
+
+        // $p = $this->argument('person');
+        // if ($p != null)
+        // {
+        //     $person = Person::find($p);
+        //     if ($person != null)
+        //     {
+        //         echo "\nPerson id = " . $p . "\n";
+        //         echo $person->all_data . "\n";
+        //         return;
+        //     }
+        // }
+        // echo "can't get Person...";
+
+        $id = $this->option('id');
+        $name = $this->option('name');
     }
 }

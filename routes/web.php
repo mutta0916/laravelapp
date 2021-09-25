@@ -24,6 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/hello/clear',  [HelloController::class, 'clear']);
 Route::get('/hello', [HelloController::class, 'index'])->name('hello');
 Route::get('/hello/{id}', [HelloController::class, 'index']);
 // Route::get('/hello/{id}/{name}', [HelloController::class, 'save']);

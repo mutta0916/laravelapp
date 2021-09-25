@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use App\Events\PersonEvent;
 use App\MyClasses\PowerMyService;
+use GrahamCampbell\ResultType\Result;
+use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 class HelloController extends Controller
 {
@@ -18,7 +21,14 @@ class HelloController extends Controller
     {
     }
 
-    public function index(PowerMyService $service)
+    public function clear()
+    {
+        Artisan::call('cache:clear');
+        Artisan::call('event:clear');
+        return redirect()->route('hello');
+    }
+
+    public function index($id = -1)
     {
         // $data = [
         //     'msg' => 'This is Vue.js application.',
@@ -26,13 +36,46 @@ class HelloController extends Controller
         // ];
         // return view('hello.index', $data);
 
-        $service->setId(1);
-        $msg = $service->say();
-        $result = Person::get();
+        // $service->setId(1);
+        // $msg = $service->say();
+        // $result = Person::get();
+        // $data = [
+        //     'input' => '',
+        //     'msg' => $msg,
+        //     'data' => $result,
+        // ];
+
+        // dump-serverの利用
+        // if ($id > 0)
+        // {
+        //     $msg = 'id = ' . $id;
+        //     $result = [Person::find($id)];
+        // }
+        // else
+        // {
+        //     $msg = 'all people data.';
+        //     $result = Person::get();
+        // }
+        // $data = [
+        //     'msg' => $msg,
+        //     'data' => $result
+        // ];
+
+        // dump($data);
+
+        // Artisanコマンド実行結果の取得
+        $opt = [
+            '--method'=>'get',
+            '--path'=>'hello',
+            '--sort'=>'uri',
+            '--compact'=>null,
+        ];
+        $output = new BufferedOutput;
+        Artisan::call('route:list', $opt, $output);
+        $msg = $output->fetch();
+
         $data = [
-            'input' => '',
             'msg' => $msg,
-            'data' => $result,
         ];
         return view('hello.index', $data);
     }

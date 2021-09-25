@@ -17,7 +17,7 @@
 @section('content')
 <body style="padding:10px;">
     <h1>Hello/index</h1>
-    <p>{{$msg}}</p>
+    <pre>{{$msg}}</pre>
 
     {{-- <div>
         <form action="/hello" method="POST">
@@ -37,14 +37,14 @@
     </table>
     <hr> --}}
 
-    <table border="1">
+    {{-- <table border="1">
         @foreach ($data as $item)
         <tr>
             <th>{{$item->id}}</th>
             <td>{{$item->all_data}}</td>
         </tr>
         @endforeach
-    </table>
+    </table> --}}
 
     <hr>
 

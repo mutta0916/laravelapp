@@ -58,5 +58,20 @@ class MyCommand extends Command
 
         $id = $this->option('id');
         $name = $this->option('name');
+        if ($id != '?')
+        {
+            $p = Person::find($id);
+        }
+        else
+        {
+            if ($name != '?')
+            {
+                $p = Person::where('name', $name)->first();
+            }
+            else
+            {
+
+            }
+        }
     }
 }
